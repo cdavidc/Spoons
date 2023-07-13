@@ -22,7 +22,7 @@ local setSetting = function(label, value)   hs.settings.set(obj.name.."."..label
 
 --- ClipboardTool.frequency
 --- Variable
---- Speed in seconds to check for clipboard changes. If you check too frequently, you will degrade performance, if you check sparsely you will loose copies. Defaults to 0.8.
+--- Speed in seconds to check for clipboard changes. If you check too frequently, you will degrade performance, if you check sparsely you will loose copies. Defaults to 0.25.
 obj.frequency = 0.25
 
 --- ClipboardTool.hist_size
