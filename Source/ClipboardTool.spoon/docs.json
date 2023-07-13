@@ -205,8 +205,8 @@
       },
       {
         "def": "ClipboardTool.frequency",
-        "desc": "Speed in seconds to check for clipboard changes. If you check too frequently, you will degrade performance, if you check sparsely you will loose copies. Defaults to 0.8.",
-        "doc": "Speed in seconds to check for clipboard changes. If you check too frequently, you will degrade performance, if you check sparsely you will loose copies. Defaults to 0.8.",
+        "desc": "Speed in seconds to check for clipboard changes. If you check too frequently, you will degrade performance, if you check sparsely you will loose copies. Defaults to 0.25.",
+        "doc": "Speed in seconds to check for clipboard changes. If you check too frequently, you will degrade performance, if you check sparsely you will loose copies. Defaults to 0.25.",
         "file": "Source/ClipboardTool.spoon//init.lua",
         "lineno": "23",
         "name": "frequency",
