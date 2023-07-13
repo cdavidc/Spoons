@@ -12,7 +12,7 @@ obj.__index = obj
 
 -- Metadata
 obj.name = "ClipboardTool"
-obj.version = "0.7"
+obj.version = "0.8"
 obj.author = "Alfred Schilken <alfred@schilken.de>"
 obj.homepage = "https://github.com/Hammerspoon/Spoons"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
@@ -114,7 +114,10 @@ obj.selectorobj = nil
 -- Internal variable - Cache for focused window to work around the current window losing focus after the chooser comes up
 obj.prevFocusedWindow = nil
 -- Internal variable - Timer object to look for pasteboard changes
-obj.timer = nil
+--obj.timer = nil
+
+-- Internal variable - Pasteboard watcher to look for pasteboard changes
+obj.pasteboard_watcher = nil
 
 local pasteboard = require("hs.pasteboard") -- http://www.hammerspoon.org/docs/hs.pasteboard.html
 local hashfn   = require("hs.hash").MD5
