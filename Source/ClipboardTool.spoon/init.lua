@@ -23,7 +23,7 @@ local setSetting = function(label, value)   hs.settings.set(obj.name.."."..label
 --- ClipboardTool.frequency
 --- Variable
 --- Speed in seconds to check for clipboard changes. If you check too frequently, you will degrade performance, if you check sparsely you will loose copies. Defaults to 0.8.
-obj.frequency = 0.8
+obj.frequency = 0.25
 
 --- ClipboardTool.hist_size
 --- Variable
@@ -113,8 +113,6 @@ obj.display_max_length = 200
 obj.selectorobj = nil
 -- Internal variable - Cache for focused window to work around the current window losing focus after the chooser comes up
 obj.prevFocusedWindow = nil
--- Internal variable - Timer object to look for pasteboard changes
---obj.timer = nil
 
 -- Internal variable - Pasteboard watcher to look for pasteboard changes
 obj.pasteboard_watcher = nil
@@ -442,11 +440,8 @@ function obj:start()
       self.selectorobj:choices(hs.fnutils.partial(self._populateChooser, self, query))
    end)
    self.selectorobj:rightClickCallback(hs.fnutils.partial(self._showContextMenu, self))
-   --Checks for changes on the pasteboard. Is it possible to replace with eventtap?
---   self.timer = hs.timer.new(self.frequency, hs.fnutils.partial(self.checkAndStorePasteboard, self))
---   self.timer:start()
    self.pasteboard_watcher = hs.pasteboard.watcher.new(hs.fnutils.partial(self.checkAndStorePasteboard, self))
-   self.pasteboard_watcher.interval(self.frequency)
+   hs.pasteboard.watcher.interval(self.frequency)
    self.pasteboard_watcher:start()
    if self.show_in_menubar then
       self.menubaritem = hs.menubar.new()
@@ -503,4 +498,3 @@ function obj:bindHotkeys(mapping)
 end
 
 return obj
-
