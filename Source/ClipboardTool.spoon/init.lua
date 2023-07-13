@@ -386,8 +386,8 @@ end
 --- Parameters:
 ---  * None
 function obj:checkAndStorePasteboard()
-   now = pasteboard.changeCount()
-   if (now > last_change) then
+--   now = pasteboard.changeCount()
+--   if (now > last_change) then
       if (not self.honor_ignoredidentifiers) or self:shouldBeStored() then
          current_clipboard = pasteboard.getContents()
          self.logger.df("current_clipboard = %s", tostring(current_clipboard))
@@ -419,8 +419,8 @@ function obj:checkAndStorePasteboard()
       else
          self.logger.df("Ignoring pasteboard entry because it matches ignoredIdentifiers")
       end
-      last_change = now
-   end
+--      last_change = now
+--   end
 end
 
 --- ClipboardTool:start()
@@ -440,8 +440,11 @@ function obj:start()
    end)
    self.selectorobj:rightClickCallback(hs.fnutils.partial(self._showContextMenu, self))
    --Checks for changes on the pasteboard. Is it possible to replace with eventtap?
-   self.timer = hs.timer.new(self.frequency, hs.fnutils.partial(self.checkAndStorePasteboard, self))
-   self.timer:start()
+--   self.timer = hs.timer.new(self.frequency, hs.fnutils.partial(self.checkAndStorePasteboard, self))
+--   self.timer:start()
+   self.pasteboard_watcher = hs.pasteboard.watcher.new(hs.fnutils.partial(self.checkAndStorePasteboard, self))
+   self.pasteboard_watcher.interval(self.frequency)
+   self.pasteboard_watcher:start()
    if self.show_in_menubar then
       self.menubaritem = hs.menubar.new()
          :setTitle(obj.menubar_title)
